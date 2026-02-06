@@ -132,7 +132,7 @@ oncontextmenu="return false">
 
 <div class="container">
 
-<h1>Second English test - Brian Wilson Academy</h1>
+<h1>English Exam – 1st Level (A1)</h1>
 
 <div class="instructions">
 <strong>Instructions:</strong><br>
@@ -206,6 +206,9 @@ You can only see your score after finishing the exam.
 </div>
 
 <script>
+/* 🔴 PEGA AQUÍ TU URL DEL APPS SCRIPT */
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyAb4ctD7QEbpP7OjOYxmZrZF7c412uNb8IDyi8HPSronTyeuj0z2NR7vxXZ86AFv8I/exec";
+
 const answers = {
 q1:"playing", q2:"watching", q3:"listening", q4:"fun", q5:"cooking",
 q6:"There is", q7:"There is", q8:"There are",
@@ -214,45 +217,63 @@ q11:"bedroom", q12:"kitchen", q13:"living room",
 q14:"bed", q15:"chairs"
 };
 
+function sendToSheets(name, score) {
+  const payload = {
+    name: name,
+    score: Math.round(score)
+  };
+
+  Object.keys(answers).forEach(q => {
+    payload[q] = document.querySelector(`[name=${q}]`).value;
+  });
+
+  fetch(SHEET_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+  });
+}
+
 function gradeExam(){
-const name = document.getElementById("studentName").value.trim();
-if(name === ""){
-alert("Please write your name before submitting the exam.");
-return;
-}
+  const name = document.getElementById("studentName").value.trim();
+  if(name === ""){
+    alert("Please write your name before submitting the exam.");
+    return;
+  }
 
-let score = 0;
-let feedback = `<h2>Student: ${name}</h2>`;
+  let score = 0;
+  let feedback = `<h2>Student: ${name}</h2>`;
 
-for(let q in answers){
-let user = document.querySelector(`[name=${q}]`).value;
-if(user === answers[q]){
-score += 100/15;
-feedback += `<p>${q}: <span class="correct">Correct</span></p>`;
-}else{
-feedback += `<p>${q}: <span class="incorrect">Incorrect</span> (Correct: ${answers[q]})</p>`;
-}
-}
+  for(let q in answers){
+    let user = document.querySelector(`[name=${q}]`).value;
+    if(user === answers[q]){
+      score += 100/15;
+      feedback += `<p>${q}: <span class="correct">Correct</span></p>`;
+    } else {
+      feedback += `<p>${q}: <span class="incorrect">Incorrect</span> (Correct: ${answers[q]})</p>`;
+    }
+  }
 
-document.getElementById("result").innerHTML =
-`<h2>Final Score: ${Math.round(score)} / 100</h2>` + feedback;
+  sendToSheets(name, score);
 
-document.getElementById("result").style.display = "block";
-document.getElementById("finishBtn").style.display = "block";
-window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+  document.getElementById("result").innerHTML =
+    `<h2>Final Score: ${Math.round(score)} / 100</h2>` + feedback;
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("finishBtn").style.display = "block";
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 }
 
 function finishExam(){
-document.body.innerHTML = `
-<div style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;font-family:Segoe UI,Arial;background:#f4f6f9;">
-  <div>
-    <h1>Exam Finished</h1>
-    <p>Please send a screenshot of your score.</p>
-    <p>You may now close this page.</p>
-  </div>
-</div>
-`;
-setTimeout(() => { window.close(); }, 800);
+  document.body.innerHTML = `
+  <div style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;font-family:Segoe UI,Arial;background:#f4f6f9;">
+    <div>
+      <h1>Exam Finished</h1>
+      <p>Please send a screenshot of your score.</p>
+      <p>You may now close this page.</p>
+    </div>
+  </div>`;
+  setTimeout(() => { window.close(); }, 800);
 }
 </script>
 
