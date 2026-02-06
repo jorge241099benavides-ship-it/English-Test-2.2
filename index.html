@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>English Exam A1 – 1st Level</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6f8;
+        margin: 0;
+        padding: 0;
+        color: #222;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    h2 {
+        margin-top: 40px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    p.context {
+        background: #eef2f7;
+        padding: 12px;
+        border-left: 5px solid #3a7afe;
+        margin: 20px 0;
+        font-size: 14px;
+    }
+
+    label {
+        display: block;
+        margin: 15px 0 5px;
+        font-weight: 600;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        margin-top: 30px;
+        padding: 15px;
+        width: 100%;
+        font-size: 16px;
+        background: #3a7afe;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #2f64d8;
+    }
+
+    #result {
+        display: none;
+        margin-top: 30px;
+        background: #f1f8e9;
+        padding: 20px;
+        border-radius: 8px;
+        font-size: 18px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .teacher {
+        margin-top: 30px;
+        background: #fff3cd;
+        padding: 20px;
+        border-radius: 8px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>English Exam – A1 (1st Level)</h1>
+
+<h2>Part 1 – Likes, Dislikes & Opinions</h2>
+<p class="context">Context: You are talking about your free time and hobbies.</p>
+
+<label>1. I like …</label>
+<input type="text" data-answer="like">
+
+<label>2. I don’t like …</label>
+<input type="text" data-answer="don't like">
+
+<label>3. I enjoy …</label>
+<input type="text" data-answer="enjoy">
+
+<label>4. In my opinion, something is …</label>
+<input type="text" data-answer="in my opinion">
+
+<label>5. Write ONE sentence about something you like or don’t like.</label>
+<input type="text" data-answer="like">
+
+<h2>Part 2 – There is / There are & Prepositions</h2>
+<p class="context">
+This is a small house. It has a living room and a kitchen.
+There is a sofa and a TV in the living room.
+</p>
+
+<label>6. There ___ a sofa in the living room.</label>
+<input type="text" data-answer="there is">
+
+<label>7. There ___ two chairs in the kitchen.</label>
+<input type="text" data-answer="there are">
+
+<label>8. The TV is ___ the sofa.</label>
+<input type="text" data-answer="in front of">
+
+<label>9. The cat is ___ the table.</label>
+<input type="text" data-answer="under">
+
+<label>10. The refrigerator is ___ the kitchen.</label>
+<input type="text" data-answer="in">
+
+<h2>Part 3 – Parts of the House & Furniture</h2>
+<p class="context">Context: Write about your house.</p>
+
+<label>11. In my house, there is a …</label>
+<input type="text" data-answer="there is">
+
+<label>12. My favorite room is the …</label>
+<input type="text" data-answer="room">
+
+<label>13. In the …, there is a …</label>
+<input type="text" data-answer="there is">
+
+<label>14. Write ONE sentence using There are.</label>
+<input type="text" data-answer="there are">
+
+<label>15. Write ONE sentence using a preposition of place.</label>
+<input type="text" data-answer="in">
+
+<button onclick="gradeExam()">Submit Exam</button>
+
+<div class="teacher">
+    <h3>Teacher Access</h3>
+    <label>Enter teacher password to see the score:</label>
+    <input type="text" id="teacherPass">
+    <button onclick="showResult()">View Score</button>
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+/* Disable copy / paste / selection */
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('paste', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+let finalScore = 0;
+
+function gradeExam() {
+    const inputs = document.querySelectorAll("input[data-answer]");
+    let pointsPerQuestion = 100 / inputs.length;
+    finalScore = 0;
+
+    inputs.forEach(input => {
+        let userAnswer = input.value.toLowerCase();
+        let key = input.dataset.answer;
+
+        if (userAnswer.includes(key)) {
+            finalScore += pointsPerQuestion;
+        }
+    });
+
+    finalScore = Math.round(finalScore);
+    alert("Exam submitted. Teacher must enter password to see the score.");
+}
+
+function showResult() {
+    const pass = document.getElementById("teacherPass").value;
+    if (pass === "teacher123") {
+        document.getElementById("result").style.display = "block";
+        document.getElementById("result").innerText = "Final Score: " + finalScore + " / 100";
+    } else {
+        alert("Incorrect password.");
+    }
+}
+</script>
+
+</body>
+</html>
