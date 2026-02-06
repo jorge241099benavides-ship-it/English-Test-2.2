@@ -202,15 +202,15 @@ You can only see your score after finishing the exam.
 </div>
 
 <script>
-/* 🔴 PEGA AQUÍ TU URL REAL DEL APPS SCRIPT */
+/* 🔴 REEMPLAZÁ ESTA URL POR LA TUYA REAL */
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzGd5tPTEOx-7__FAI8PfXdLPlR7i_B8xHzCAxuKlxe0fAjNLpB1S8ecBqtdDHVccxa/exec";
 
 const answers = {
-q1:"playing", q2:"watching", q3:"listening", q4:"fun", q5:"cooking",
-q6:"There is", q7:"There is", q8:"There are",
-q9:"in front of", q10:"in",
-q11:"bedroom", q12:"kitchen", q13:"living room",
-q14:"bed", q15:"chairs"
+  q1:"playing", q2:"watching", q3:"listening", q4:"fun", q5:"cooking",
+  q6:"There is", q7:"There is", q8:"There are",
+  q9:"in front of", q10:"in",
+  q11:"bedroom", q12:"kitchen", q13:"living room",
+  q14:"bed", q15:"chairs"
 };
 
 function sendToSheets(name, score) {
@@ -239,7 +239,7 @@ function gradeExam(){
   let feedback = `<h2>Student: ${name}</h2>`;
 
   for(let q in answers){
-    let user = document.querySelector(`[name=${q}]`).value;
+    const user = document.querySelector(`[name=${q}]`).value;
     if(user === answers[q]){
       score += 100/15;
       feedback += `<p>${q}: <span class="correct">Correct</span></p>`;
@@ -250,8 +250,15 @@ function gradeExam(){
 
   sendToSheets(name, score);
 
-  document.getElementById("result").innerHTML =
-    `<h2>Final Score: ${Math.round(score)} / 100</h2>` + feedback;
+  document.getElementById("result").innerHTML = `
+    <div style="background:#fff3cd;border:1px solid #ffeeba;padding:15px;border-radius:8px;margin-bottom:20px;">
+      <strong>Important:</strong><br>
+      Please take a screenshot of your score and answers before clicking <strong>Finish</strong>.
+    </div>
+
+    <h2>Final Score: ${Math.round(score)} / 100</h2>
+    ${feedback}
+  `;
 
   document.getElementById("result").style.display = "block";
   document.getElementById("finishBtn").style.display = "block";
@@ -263,7 +270,6 @@ function finishExam(){
   <div style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;font-family:Segoe UI,Arial;background:#f4f6f9;">
     <div>
       <h1>Exam Finished</h1>
-      <p>Please send a screenshot of your score.</p>
       <p>You may now close this page.</p>
     </div>
   </div>`;
@@ -273,4 +279,3 @@ function finishExam(){
 
 </body>
 </html>
-
