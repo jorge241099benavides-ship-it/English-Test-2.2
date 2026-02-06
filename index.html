@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Second English test - Brian Wilson Academy A1</title>
+<title>English Exam A1</title>
 
 <style>
 * {
@@ -102,6 +102,15 @@ button {
   font-weight: bold;
 }
 
+button:hover {
+  opacity: 0.95;
+}
+
+#finishBtn {
+  background: #c62828;
+  margin-top: 20px;
+}
+
 .result {
   display: none;
   margin-top: 35px;
@@ -123,12 +132,12 @@ oncontextmenu="return false">
 
 <div class="container">
 
-<h1>Second English test - Brian Wilson Academy (A1)</h1>
+<h1>Second English test - Brian Wilson Academy</h1>
 
 <div class="instructions">
 <strong>Instructions:</strong><br>
-Write your name. Read carefully. Select the correct answer.<br>
-You can see your score only after finishing the exam.
+Write your full name. Read carefully and select the correct answer.<br>
+You can only see your score after finishing the exam.
 </div>
 
 <div class="student-info">
@@ -138,7 +147,6 @@ You can see your score only after finishing the exam.
 
 <form id="exam">
 
-<!-- QUESTIONS -->
 <div class="section">
 <h2>Exam Questions</h2>
 
@@ -189,26 +197,27 @@ You can see your score only after finishing the exam.
 
 </div>
 
-<button type="button" onclick="gradeExam()">Finish Exam</button>
+<button type="button" onclick="gradeExam()">Submit Exam</button>
 </form>
 
 <div class="result" id="result"></div>
+<button id="finishBtn" style="display:none;" onclick="finishExam()">Finish</button>
 
 </div>
 
 <script>
 const answers = {
-Q1:"playing", Q2:"watching", Q3:"listening", Q4:"fun", Q5:"cooking",
-Q6:"There is", Q7:"There is", Q8:"There are",
-Q9:"in front of", Q10:"in",
-Q11:"bedroom", Q12:"kitchen", Q13:"living room",
-Q14:"bed", Q15:"chairs"
+q1:"playing", q2:"watching", q3:"listening", q4:"fun", q5:"cooking",
+q6:"There is", q7:"There is", q8:"There are",
+q9:"in front of", q10:"in",
+q11:"bedroom", q12:"kitchen", q13:"living room",
+q14:"bed", q15:"chairs"
 };
 
 function gradeExam(){
 const name = document.getElementById("studentName").value.trim();
 if(name === ""){
-alert("Please write your name before finishing the exam.");
+alert("Please write your name before submitting the exam.");
 return;
 }
 
@@ -229,12 +238,23 @@ document.getElementById("result").innerHTML =
 `<h2>Final Score: ${Math.round(score)} / 100</h2>` + feedback;
 
 document.getElementById("result").style.display = "block";
+document.getElementById("finishBtn").style.display = "block";
 window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+}
+
+function finishExam(){
+document.body.innerHTML = `
+<div style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;font-family:Segoe UI,Arial;background:#f4f6f9;">
+  <div>
+    <h1>Exam Finished</h1>
+    <p>Please send a screenshot of your score.</p>
+    <p>You may now close this page.</p>
+  </div>
+</div>
+`;
+setTimeout(() => { window.close(); }, 800);
 }
 </script>
 
 </body>
 </html>
-
-
-
