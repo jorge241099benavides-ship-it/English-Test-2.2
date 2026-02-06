@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Exam - A1</title>
+<title>English Exam A1</title>
 
 <style>
 * {
@@ -13,8 +13,8 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f6f9;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #e9efff, #f7f9fc);
   margin: 0;
   padding: 20px;
   color: #222;
@@ -24,67 +24,94 @@ body {
   max-width: 900px;
   margin: auto;
   background: #ffffff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
-h1, h2 {
+h1 {
   text-align: center;
+  color: #1f3c88;
+}
+
+.instructions {
+  text-align: center;
+  background: #f0f4ff;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.student-info {
+  margin-bottom: 25px;
+}
+
+.student-info label {
+  font-weight: bold;
+}
+
+.student-info input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccd4ea;
 }
 
 .section {
   margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #fafbff;
+  border-left: 6px solid #1f3c88;
+}
+
+.section h2 {
+  margin-top: 0;
+  color: #1f3c88;
 }
 
 .question {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
-label {
-  display: block;
-  margin: 5px 0;
+.question p {
+  margin: 0 0 6px 0;
+  font-weight: 500;
 }
 
 select {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  padding: 10px;
   font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccd4ea;
 }
 
 button {
   width: 100%;
-  padding: 15px;
+  margin-top: 30px;
+  padding: 16px;
   font-size: 18px;
-  background: #1f3c88;
+  background: linear-gradient(135deg, #1f3c88, #3456c7);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
-}
-
-button:hover {
-  background: #162f6a;
+  font-weight: bold;
 }
 
 .result {
   display: none;
-  margin-top: 30px;
-  padding: 20px;
-  background: #eef2f7;
-  border-radius: 6px;
+  margin-top: 35px;
+  padding: 25px;
+  background: #eef2ff;
+  border-radius: 12px;
 }
 
-.correct {
-  color: green;
-  font-weight: bold;
-}
-
-.incorrect {
-  color: red;
-  font-weight: bold;
-}
+.correct { color: #1a7f37; font-weight: bold; }
+.incorrect { color: #c62828; font-weight: bold; }
 </style>
 </head>
 
@@ -97,128 +124,69 @@ oncontextmenu="return false">
 <div class="container">
 
 <h1>English Exam – 1st Level (A1)</h1>
-<p><strong>Instructions:</strong> Read carefully and select the correct answer. You can only see your score after finishing the exam.</p>
+
+<div class="instructions">
+<strong>Instructions:</strong><br>
+Write your name. Read carefully. Select the correct answer.<br>
+You can see your score only after finishing the exam.
+</div>
+
+<div class="student-info">
+<label>Student Name</label>
+<input type="text" id="studentName" placeholder="Write your full name">
+</div>
 
 <form id="exam">
 
-<!-- PART 1 -->
+<!-- QUESTIONS -->
 <div class="section">
-<h2>PART 1 – Likes, Dislikes & Opinions (35 pts)</h2>
+<h2>Exam Questions</h2>
 
-<div class="question">1. I like ___ soccer.
-<select name="q1">
-<option value="">Select</option>
-<option value="playing">playing</option>
-<option value="play">play</option>
-</select></div>
+<div class="question"><p>1. I like ___ soccer.</p>
+<select name="q1"><option value="">Select</option><option>playing</option><option>play</option></select></div>
 
-<div class="question">2. I don’t like ___ TV at night.
-<select name="q2">
-<option value="">Select</option>
-<option value="watching">watching</option>
-<option value="watch">watch</option>
-</select></div>
+<div class="question"><p>2. I don’t like ___ TV at night.</p>
+<select name="q2"><option value="">Select</option><option>watching</option><option>watch</option></select></div>
 
-<div class="question">3. She likes ___ to music.
-<select name="q3">
-<option value="">Select</option>
-<option value="listening">listening</option>
-<option value="listen">listen</option>
-</select></div>
+<div class="question"><p>3. She likes ___ to music.</p>
+<select name="q3"><option value="">Select</option><option>listening</option><option>listen</option></select></div>
 
-<div class="question">4. In my opinion, soccer is ___.
-<select name="q4">
-<option value="">Select</option>
-<option value="fun">fun</option>
-<option value="in">in</option>
-</select></div>
+<div class="question"><p>4. In my opinion, soccer is ___.</p>
+<select name="q4"><option value="">Select</option><option>fun</option><option>in</option></select></div>
 
-<div class="question">5. I enjoy ___ at home.
-<select name="q5">
-<option value="">Select</option>
-<option value="cooking">cooking</option>
-<option value="cook">cook</option>
-</select></div>
-</div>
+<div class="question"><p>5. I enjoy ___ at home.</p>
+<select name="q5"><option value="">Select</option><option>cooking</option><option>cook</option></select></div>
 
-<!-- PART 2 -->
-<div class="section">
-<h2>PART 2 – There is / There are & Prepositions (35 pts)</h2>
+<div class="question"><p>6. ___ a sofa in the living room.</p>
+<select name="q6"><option value="">Select</option><option>There is</option><option>There are</option></select></div>
 
-<div class="question">6. ___ a sofa in the living room.
-<select name="q6">
-<option value="">Select</option>
-<option value="There is">There is</option>
-<option value="There are">There are</option>
-</select></div>
+<div class="question"><p>7. ___ a TV in the living room.</p>
+<select name="q7"><option value="">Select</option><option>There is</option><option>There are</option></select></div>
 
-<div class="question">7. ___ a TV in the living room.
-<select name="q7">
-<option value="">Select</option>
-<option value="There is">There is</option>
-<option value="There are">There are</option>
-</select></div>
+<div class="question"><p>8. ___ two chairs next to the table.</p>
+<select name="q8"><option value="">Select</option><option>There is</option><option>There are</option></select></div>
 
-<div class="question">8. ___ two chairs next to the table.
-<select name="q8">
-<option value="">Select</option>
-<option value="There is">There is</option>
-<option value="There are">There are</option>
-</select></div>
+<div class="question"><p>9. The TV is ___ the sofa.</p>
+<select name="q9"><option value="">Select</option><option>in front of</option><option>under</option></select></div>
 
-<div class="question">9. The TV is ___ the sofa.
-<select name="q9">
-<option value="">Select</option>
-<option value="in front of">in front of</option>
-<option value="under">under</option>
-</select></div>
+<div class="question"><p>10. The table is ___ the living room.</p>
+<select name="q10"><option value="">Select</option><option>in</option><option>on</option></select></div>
 
-<div class="question">10. The table is ___ the living room.
-<select name="q10">
-<option value="">Select</option>
-<option value="in">in</option>
-<option value="on">on</option>
-</select></div>
-</div>
+<div class="question"><p>11. You sleep in the ___.</p>
+<select name="q11"><option value="">Select</option><option>bedroom</option><option>kitchen</option></select></div>
 
-<!-- PART 3 -->
-<div class="section">
-<h2>PART 3 – Parts of the House & Furniture (30 pts)</h2>
+<div class="question"><p>12. A refrigerator is in the ___.</p>
+<select name="q12"><option value="">Select</option><option>kitchen</option><option>bathroom</option></select></div>
 
-<div class="question">11. You sleep in the ___.
-<select name="q11">
-<option value="">Select</option>
-<option value="bedroom">bedroom</option>
-<option value="kitchen">kitchen</option>
-</select></div>
+<div class="question"><p>13. A sofa is in the ___.</p>
+<select name="q13"><option value="">Select</option><option>living room</option><option>bedroom</option></select></div>
 
-<div class="question">12. A refrigerator is in the ___.
-<select name="q12">
-<option value="">Select</option>
-<option value="kitchen">kitchen</option>
-<option value="bathroom">bathroom</option>
-</select></div>
+<div class="question"><p>14. There is a ___ in the bedroom.</p>
+<select name="q14"><option value="">Select</option><option>bed</option><option>chairs</option></select></div>
 
-<div class="question">13. A sofa is in the ___.
-<select name="q13">
-<option value="">Select</option>
-<option value="living room">living room</option>
-<option value="bedroom">bedroom</option>
-</select></div>
+<div class="question"><p>15. There are ___ in the kitchen.</p>
+<select name="q15"><option value="">Select</option><option>chairs</option><option>bed</option></select></div>
 
-<div class="question">14. There is a ___ in the bedroom.
-<select name="q14">
-<option value="">Select</option>
-<option value="bed">bed</option>
-<option value="chairs">chairs</option>
-</select></div>
-
-<div class="question">15. There are ___ in the kitchen.
-<select name="q15">
-<option value="">Select</option>
-<option value="chairs">chairs</option>
-<option value="bed">bed</option>
-</select></div>
 </div>
 
 <button type="button" onclick="gradeExam()">Finish Exam</button>
@@ -238,12 +206,18 @@ q14:"bed", q15:"chairs"
 };
 
 function gradeExam(){
+const name = document.getElementById("studentName").value.trim();
+if(name === ""){
+alert("Please write your name before finishing the exam.");
+return;
+}
+
 let score = 0;
-let feedback = "<h2>Result</h2>";
+let feedback = `<h2>Student: ${name}</h2>`;
 
 for(let q in answers){
-let userAnswer = document.querySelector(`[name=${q}]`).value;
-if(userAnswer === answers[q]){
+let user = document.querySelector(`[name=${q}]`).value;
+if(user === answers[q]){
 score += 100/15;
 feedback += `<p>${q}: <span class="correct">Correct</span></p>`;
 }else{
@@ -251,14 +225,13 @@ feedback += `<p>${q}: <span class="incorrect">Incorrect</span> (Correct: ${answe
 }
 }
 
-feedback = `<h2>Your Score: ${Math.round(score)} / 100</h2>` + feedback;
-document.getElementById("result").innerHTML = feedback;
+document.getElementById("result").innerHTML =
+`<h2>Final Score: ${Math.round(score)} / 100</h2>` + feedback;
+
 document.getElementById("result").style.display = "block";
-window.scrollTo(0, document.body.scrollHeight);
+window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
 }
 </script>
 
 </body>
 </html>
-
-
